@@ -1,0 +1,251 @@
+{
+  "kind": "static-only",
+  "passed": 61,
+  "checks": [
+    {
+      "name": "XML root/pass order",
+      "pass": true
+    },
+    {
+      "name": "Eight expected embedded payloads",
+      "pass": true
+    },
+    {
+      "name": "Safe embedded filename Apply-Base.ps1",
+      "pass": true
+    },
+    {
+      "name": "Embedded parity Apply-Base.ps1",
+      "pass": true
+    },
+    {
+      "name": "Embedded destination Apply-Base.ps1",
+      "pass": true
+    },
+    {
+      "name": "Safe embedded filename Initialize-Host.ps1",
+      "pass": true
+    },
+    {
+      "name": "Embedded parity Initialize-Host.ps1",
+      "pass": true
+    },
+    {
+      "name": "Embedded destination Initialize-Host.ps1",
+      "pass": true
+    },
+    {
+      "name": "Safe embedded filename New-HostAccounts.ps1",
+      "pass": true
+    },
+    {
+      "name": "Embedded parity New-HostAccounts.ps1",
+      "pass": true
+    },
+    {
+      "name": "Embedded destination New-HostAccounts.ps1",
+      "pass": true
+    },
+    {
+      "name": "Safe embedded filename Set-DefaultProfile.ps1",
+      "pass": true
+    },
+    {
+      "name": "Embedded parity Set-DefaultProfile.ps1",
+      "pass": true
+    },
+    {
+      "name": "Embedded destination Set-DefaultProfile.ps1",
+      "pass": true
+    },
+    {
+      "name": "Safe embedded filename Test-Host.ps1",
+      "pass": true
+    },
+    {
+      "name": "Embedded parity Test-Host.ps1",
+      "pass": true
+    },
+    {
+      "name": "Embedded destination Test-Host.ps1",
+      "pass": true
+    },
+    {
+      "name": "Safe embedded filename Trim-Apps.ps1",
+      "pass": true
+    },
+    {
+      "name": "Embedded parity Trim-Apps.ps1",
+      "pass": true
+    },
+    {
+      "name": "Embedded destination Trim-Apps.ps1",
+      "pass": true
+    },
+    {
+      "name": "Safe embedded filename HostProfile.json",
+      "pass": true
+    },
+    {
+      "name": "Embedded parity HostProfile.json",
+      "pass": true
+    },
+    {
+      "name": "Embedded destination HostProfile.json",
+      "pass": true
+    },
+    {
+      "name": "Safe embedded filename TaskbarLayoutModification.xml",
+      "pass": true
+    },
+    {
+      "name": "Embedded parity TaskbarLayoutModification.xml",
+      "pass": true
+    },
+    {
+      "name": "Embedded destination TaskbarLayoutModification.xml",
+      "pass": true
+    },
+    {
+      "name": "Absent AutoLogon",
+      "pass": true
+    },
+    {
+      "name": "Absent UserAccounts",
+      "pass": true
+    },
+    {
+      "name": "Absent DiskConfiguration",
+      "pass": true
+    },
+    {
+      "name": "Absent InstallTo",
+      "pass": true
+    },
+    {
+      "name": "Absent InstallToAvailablePartition",
+      "pass": true
+    },
+    {
+      "name": "Absent unsafe setting BypassTPMCheck",
+      "pass": true
+    },
+    {
+      "name": "Absent unsafe setting BypassSecureBootCheck",
+      "pass": true
+    },
+    {
+      "name": "Absent unsafe setting BypassRAMCheck",
+      "pass": true
+    },
+    {
+      "name": "Absent unsafe setting BypassNRO",
+      "pass": true
+    },
+    {
+      "name": "Absent unsafe setting SkipMachineOOBE",
+      "pass": true
+    },
+    {
+      "name": "Absent unsafe setting SkipUserOOBE",
+      "pass": true
+    },
+    {
+      "name": "Absent unsafe setting Unrestricted",
+      "pass": true
+    },
+    {
+      "name": "Absent unsafe setting Set-ExecutionPolicy",
+      "pass": true
+    },
+    {
+      "name": "Absent unsafe setting IntegratedServicesRegionPolicySet.json",
+      "pass": true
+    },
+    {
+      "name": "Absent unsafe setting Disable-ComputerRestore",
+      "pass": true
+    },
+    {
+      "name": "Workstations setup key",
+      "pass": true
+    },
+    {
+      "name": "No specialize activation key",
+      "pass": true
+    },
+    {
+      "name": "No wildcard Appx removal",
+      "pass": true
+    },
+    {
+      "name": "Protected apps preserved",
+      "pass": true
+    },
+    {
+      "name": "Required services preserved",
+      "pass": true
+    },
+    {
+      "name": "No protected capability removal",
+      "pass": true
+    },
+    {
+      "name": "WHP and security feature retention",
+      "pass": true
+    },
+    {
+      "name": "WHP enabled",
+      "pass": true
+    },
+    {
+      "name": "Hypervisor autostart",
+      "pass": true
+    },
+    {
+      "name": "VBS enabled",
+      "pass": true
+    },
+    {
+      "name": "HVCI enabled",
+      "pass": true
+    },
+    {
+      "name": "Secure Boot and DMA required",
+      "pass": true
+    },
+    {
+      "name": "No HVCI firmware lock",
+      "pass": true
+    },
+    {
+      "name": "Credential Guard without firmware lock",
+      "pass": true
+    },
+    {
+      "name": "Required telemetry retained",
+      "pass": true
+    },
+    {
+      "name": "No feature payload destruction",
+      "pass": true
+    },
+    {
+      "name": "Ordered extract/apply with exit propagation",
+      "pass": true
+    },
+    {
+      "name": "No download-and-execute in install payload",
+      "pass": true
+    },
+    {
+      "name": "Taskbar retains a functional Explorer pin",
+      "pass": true
+    },
+    {
+      "name": "Generator generic answer-file XSD",
+      "pass": true
+    }
+  ],
+  "xml_sha256": "e6a33b5e1eb5af4fe752603f667ca192416aec7f24afd3f8bdf9cf559bc6bb65"
+}

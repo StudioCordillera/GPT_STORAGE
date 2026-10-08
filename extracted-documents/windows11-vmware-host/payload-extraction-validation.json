@@ -1,0 +1,6 @@
+{
+  "Kind": "Local extractor functional checks",
+  "VerifiedPayloads": 8,
+  "RejectedUnsafeNames": 4,
+  "WindowsConfigurationPayloadsExecuted": 0
+}

@@ -1,0 +1,38 @@
+{
+  "Kind": "Static PowerShell AST parsing",
+  "ParserVersion": "7.5.4",
+  "Results": [
+    {
+      "File": "Apply-Base.ps1",
+      "Errors": 0
+    },
+    {
+      "File": "Initialize-Host.ps1",
+      "Errors": 0
+    },
+    {
+      "File": "New-HostAccounts.ps1",
+      "Errors": 0
+    },
+    {
+      "File": "Set-DefaultProfile.ps1",
+      "Errors": 0
+    },
+    {
+      "File": "Test-Host.ps1",
+      "Errors": 0
+    },
+    {
+      "File": "Trim-Apps.ps1",
+      "Errors": 0
+    },
+    {
+      "File": "Validate-EmbeddedPayload.ps1",
+      "Errors": 0
+    },
+    {
+      "File": "Validate-Syntax.ps1",
+      "Errors": 0
+    }
+  ]
+}

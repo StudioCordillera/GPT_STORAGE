@@ -1,0 +1,54 @@
+{
+  "profileVersion": 1,
+  "targetModel": "Dell XPS 15 9510",
+  "targetEdition": "ProfessionalWorkstation",
+  "removeAppx": [
+    "Microsoft.Microsoft3DViewer", "Microsoft.BingSearch", "Microsoft.WindowsCamera",
+    "Clipchamp.Clipchamp", "Microsoft.Copilot", "Microsoft.Windows.Ai.Copilot.Provider",
+    "Microsoft.549981C3F5F10", "Microsoft.Windows.DevHome",
+    "MicrosoftCorporationII.MicrosoftFamily", "Microsoft.WindowsFeedbackHub",
+    "Microsoft.Edge.GameAssist", "Microsoft.GetHelp", "Microsoft.Getstarted",
+    "microsoft.windowscommunicationsapps", "Microsoft.WindowsMaps",
+    "Microsoft.MixedReality.Portal", "Microsoft.BingNews", "Microsoft.MicrosoftOfficeHub",
+    "Microsoft.Office.OneNote", "Microsoft.OutlookForWindows", "Microsoft.Paint",
+    "Microsoft.MSPaint", "Microsoft.People", "Microsoft.PowerAutomateDesktop",
+    "MicrosoftCorporationII.QuickAssist", "Microsoft.SkypeApp",
+    "Microsoft.MicrosoftSolitaireCollection", "Microsoft.MicrosoftStickyNotes",
+    "MicrosoftTeams", "MSTeams", "Microsoft.WindowsSoundRecorder", "Microsoft.Wallet",
+    "Microsoft.BingWeather", "Microsoft.Xbox.TCUI", "Microsoft.XboxApp",
+    "Microsoft.XboxGameOverlay", "Microsoft.XboxGamingOverlay", "Microsoft.XboxIdentityProvider",
+    "Microsoft.XboxSpeechToTextOverlay", "Microsoft.GamingApp", "Microsoft.YourPhone",
+    "Microsoft.ZuneMusic", "Microsoft.ZuneVideo", "Microsoft.Windows.Photos",
+    "Microsoft.ScreenSketch", "Microsoft.WindowsAlarms", "Microsoft.Todos"
+  ],
+  "removeCapabilityPrefixes": [
+    "Language.Handwriting", "Language.Speech", "Language.TextToSpeech", "Language.OCR",
+    "Browser.InternetExplorer", "MathRecognizer", "OneCoreUAP.OneSync", "OpenSSH.Client",
+    "OpenSSH.Server", "Microsoft.Windows.MSPaint", "Microsoft.Windows.PowerShell.ISE",
+    "App.Support.QuickAssist", "App.StepsRecorder", "Microsoft.Windows.WordPad",
+    "Media.WindowsMediaPlayer"
+  ],
+  "disableFeatures": [
+    "SMB1Protocol", "MicrosoftWindowsPowerShellV2Root", "TelnetClient", "TFTP",
+    "IIS-WebServerRole", "WorkFolders-Client", "Printing-XPSServices",
+    "Printing-PrintToPDFServices", "Microsoft-RemoteDesktopConnection", "Recall"
+  ],
+  "disabledServices": [
+    "RemoteRegistry", "WinRM", "SSDPSRV", "upnphost", "Spooler", "WSearch",
+    "MapsBroker", "WMPNetworkSvc", "Fax", "RetailDemo", "XblAuthManager",
+    "XblGameSave", "XboxNetApiSvc", "XboxGipSvc"
+  ],
+  "requiredServices": [
+    "wscsvc", "WinDefend", "SecurityHealthService", "DiagTrack", "BFE", "mpssvc",
+    "VaultSvc", "wuauserv", "BITS", "CryptSvc", "TrustedInstaller", "WaaSMedicSvc",
+    "EventLog", "Schedule", "msiserver", "Winmgmt", "WlanSvc", "Dhcp", "Dnscache",
+    "NlaSvc", "nsi", "Power", "PlugPlay", "RpcSs", "DcomLaunch", "SamSs"
+  ],
+  "protectedAppx": [
+    "Microsoft.SecHealthUI", "Microsoft.WindowsStore", "Microsoft.StorePurchaseApp",
+    "Microsoft.DesktopAppInstaller", "Microsoft.WindowsTerminal", "Microsoft.WindowsNotepad",
+    "Microsoft.AAD.BrokerPlugin", "Microsoft.Windows.CloudExperienceHost",
+    "Microsoft.Windows.ShellExperienceHost", "Microsoft.Windows.StartMenuExperienceHost",
+    "Microsoft.AccountsControl", "Microsoft.LockApp", "windows.immersivecontrolpanel"
+  ]
+}
