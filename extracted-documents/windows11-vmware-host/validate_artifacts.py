@@ -21,7 +21,7 @@ def check(name, condition):
 check('XML root/pass order', tree.getroot().tag == '{%s}unattend' % U and
       [s.get('pass') for s in tree.findall('u:settings', ns)] == ['windowsPE', 'specialize', 'oobeSystem'])
 embedded = tree.findall('x:Extensions/x:File', ns)
-check('Eight expected embedded payloads', len(embedded) == 8)
+check('Nine expected embedded payloads', len(embedded) == 9)
 for node in embedded:
     name = node.get('name')
     check('Safe embedded filename ' + name, re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.-]+\.(ps1|json|xml)', name) is not None)
@@ -56,7 +56,10 @@ for name, snippet in {
     check(name, snippet in base)
 commands = tree.findall("u:settings[@pass='specialize']//u:RunSynchronousCommand", ns)
 check('Ordered extract/apply with exit propagation', [c.find('u:Order', ns).text for c in commands] == ['1','2'] and "if (-not $?) { exit 1 }" in commands[1].find('u:Path', ns).text)
-check('No download-and-execute in install payload', all(x.lower() not in payload.lower() for x in ['Invoke-WebRequest','DownloadString','Start-BitsTransfer','curl.exe','Invoke-Expression']))
+first_logon = tree.findall("u:settings[@pass='oobeSystem']//u:FirstLogonCommands/u:SynchronousCommand", ns)
+check('Single automatic post-OOBE workflow', len(first_logon) == 1 and 'Complete-Setup.ps1' in first_logon[0].find('u:CommandLine', ns).text)
+check('Configured password prompts retained', first_logon[0].find('u:RequiresUserInput', ns).text == 'true' and 'Read-Host' in (ROOT / 'New-HostAccounts.ps1').read_text())
+check('No download-and-execute in install payload' , all(x.lower() not in payload.lower() for x in ['Invoke-WebRequest','DownloadString','Start-BitsTransfer','curl.exe','Invoke-Expression']))
 taskbar = E.parse(str(ROOT / 'TaskbarLayoutModification.xml'))
 check('Taskbar retains a functional Explorer pin', 'File Explorer.lnk' in E.tostring(taskbar).decode())
 # The optional schema argument is the matching generator's generic structure schema.

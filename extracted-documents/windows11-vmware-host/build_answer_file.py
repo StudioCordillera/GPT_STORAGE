@@ -55,6 +55,13 @@ shell = component(oobe, 'Microsoft-Windows-Shell-Setup')
 oobe_settings = element(shell, 'OOBE')
 element(oobe_settings, 'HideWirelessSetupInOOBE', 'false')
 element(oobe_settings, 'HideOnlineAccountScreens', 'false')
+# Launch the post-OOBE workflow automatically as the initial administrator.
+first_logon = element(shell, 'FirstLogonCommands')
+command = element(first_logon, 'SynchronousCommand', **{'{%s}action' % W: 'add'})
+element(command, 'Order', 1)
+element(command, 'Description', 'Complete host initialization, accounts and base validation')
+element(command, 'CommandLine', r'powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%WINDIR%\Setup\Scripts\HostBase\Complete-Setup.ps1"')
+element(command, 'RequiresUserInput', 'true')
 # No UserAccounts, AutoLogon, OOBE bypass, global execution-policy change, or Wi-Fi password.
 extensions = E.SubElement(root, '{%s}Extensions' % X, nsmap={None: X})
 extract = E.SubElement(extensions, '{%s}ExtractScript' % X)
@@ -73,7 +80,7 @@ foreach ($file in $Document.unattend.Extensions.File) {
 ''')
 payload_names = ['Apply-Base.ps1', 'Initialize-Host.ps1', 'New-HostAccounts.ps1',
                  'Set-DefaultProfile.ps1', 'Test-Host.ps1', 'Trim-Apps.ps1',
-                 'HostProfile.json', 'TaskbarLayoutModification.xml']
+                 'HostProfile.json', 'TaskbarLayoutModification.xml', 'Complete-Setup.ps1']
 files = [ROOT / name for name in payload_names]
 for path in files:
     embedded = E.SubElement(extensions, '{%s}File' % X, name=path.name,

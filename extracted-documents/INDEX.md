@@ -24,3 +24,4 @@
 - [windows11-vmware-host/powershell-syntax-validation.json](windows11-vmware-host/powershell-syntax-validation.json)
 - [windows11-vmware-host/static-validation.json](windows11-vmware-host/static-validation.json)
 - [windows11-vmware-host/validate_artifacts.py](windows11-vmware-host/validate_artifacts.py)
+- [windows11-vmware-host/Complete-Setup.ps1](windows11-vmware-host/Complete-Setup.ps1)

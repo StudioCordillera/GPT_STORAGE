@@ -1,13 +1,13 @@
 {
   "kind": "static-only",
-  "passed": 61,
+  "passed": 66,
   "checks": [
     {
       "name": "XML root/pass order",
       "pass": true
     },
     {
-      "name": "Eight expected embedded payloads",
+      "name": "Nine expected embedded payloads",
       "pass": true
     },
     {
@@ -104,6 +104,18 @@
     },
     {
       "name": "Embedded destination TaskbarLayoutModification.xml",
+      "pass": true
+    },
+    {
+      "name": "Safe embedded filename Complete-Setup.ps1",
+      "pass": true
+    },
+    {
+      "name": "Embedded parity Complete-Setup.ps1",
+      "pass": true
+    },
+    {
+      "name": "Embedded destination Complete-Setup.ps1",
       "pass": true
     },
     {
@@ -235,6 +247,14 @@
       "pass": true
     },
     {
+      "name": "Single automatic post-OOBE workflow",
+      "pass": true
+    },
+    {
+      "name": "Configured password prompts retained",
+      "pass": true
+    },
+    {
       "name": "No download-and-execute in install payload",
       "pass": true
     },
@@ -247,5 +267,5 @@
       "pass": true
     }
   ],
-  "xml_sha256": "e6a33b5e1eb5af4fe752603f667ca192416aec7f24afd3f8bdf9cf559bc6bb65"
+  "xml_sha256": "0776d8373a0694d00a0c4f609a15885126e58ef8f1ee6c9869b9c683593998f3"
 }

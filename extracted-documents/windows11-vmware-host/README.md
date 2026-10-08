@@ -2,7 +2,7 @@
 
 This is a **stock Windows 11 Pro for Workstations x64 installation with a minimal desktop**, designed to support the security stack in your attached requirements. It removes consumer applications, sync clients and unused remote/discovery/printing features while keeping the Windows components that patching, protection, vendor installers and VMware need. It is not a rebuilt Windows ISO, a Server Core image, or a claim that a smaller supported image is impossible.
 
-The delivered `autounattend.xml` is self-contained. Its embedded scripts run during the specialize phase, before OOBE. Disk selection, sign-in and passwords remain interactive. No host installation, firmware change, encryption, third-party installation or Windows runtime test has been performed from this Linux workspace.
+The delivered `autounattend.xml` is self-contained. Its embedded scripts run during the specialize phase, before OOBE. Disk selection, sign-in and passwords remain interactive. At the first administrator sign-in, the embedded completion workflow automatically runs initialization, opens the existing HOST-ADMIN/WORK password prompts, and runs base validation. No manual PowerShell commands are needed for these steps. No host installation, firmware change, encryption, third-party installation or Windows runtime test has been performed from this Linux workspace.
 
 ## What the install configures
 
@@ -31,51 +31,19 @@ Security capabilities, updateability and application compatibility determine the
 
 The file uses the generator's embedded-payload technique, but is a reviewed custom answer file. Regenerating it on the website can discard custom scripts. Change the source payloads and rebuild deliberately; see `GENERATOR-SETTINGS.md`.
 
-## 2. Initialize, patch and verify the base
+## 2. Automatic completion after OOBE
 
-During Setup, `Apply-Base.ps1` extracts to `%WINDIR%\Setup\Scripts\HostBase`, applies the profile and writes protected reports under `%ProgramData%\HostBase`. It does not restart Windows itself. A configuration report with `Success: true` is not proof that HVCI, BitLocker or a vendor product is running.
+Complete the configured normal OOBE and sign in with its initial administrator account. Windows automatically opens `Complete-Setup.ps1` through a single elevated FirstLogonCommands entry. It runs `Initialize-Host.ps1`, then `New-HostAccounts.ps1`, then `Test-Host.ps1 -Stage Base -ScanWindowsUpdate` in order. You do not need to open PowerShell or run those scripts yourself.
 
-After OOBE, open **64-bit Windows PowerShell as administrator**:
+Enter unique passwords of at least 14 characters when the existing HOST-ADMIN and WORK prompts appear. These interactive prompts are intentional: no passwords are embedded, no accounts are passwordless, and automatic logon stays off. The optional ACADEMIC/USERS switch remains off. Keep the completion window open until it finishes, then press Enter to close it.
 
-```powershell
-$scripts = Join-Path $env:WINDIR 'Setup\Scripts\HostBase'
-Get-Content "$env:ProgramData\HostBase\Apply-Base.json"
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$scripts\Initialize-Host.ps1"
-```
+Reports are under `%ProgramData%\HostBase`: `Setup-Completion.json`, `Apply-Base.json`, `Initialize-Host.log` and `Host-Validation.json`. Failed initialization or account creation stops subsequent steps and is shown in the window/report. Failed validation checks and outstanding manual checks are reported separately from script execution completion. The workflow does not silently retry partial account creation or mark a machine deployment-ready.
 
-`Bypass` applies only to that PowerShell process for your reviewed local setup script. The machine-wide execution policy is unchanged. If enterprise App Control/Smart App Control blocks an unsigned script, use an approved signature/deployment path; do not disable application control to run it. A matching signed Sense FoD source can be passed as `-SenseSource D:\FoD` if Windows Update cannot provide the discovered capability. Missing `Sense` is reported as a prerequisite failure, not disguised by inventing a capability.
+This automates execution of the existing base scripts. It does not add automatic disk wiping, change the computer name/edition/security policy, install drivers/vendor software, apply Windows updates, encrypt disks or remove the initial OOBE administrator. The update scan reports applicable updates; it does not install them. Install Windows/OEM updates and reboot as needed; later verification may need repeating after hardware or software changes.
 
-Initialization must run **before** Bitdefender or another third-party AV. It configures Defender's PUA/cloud/behavior/script protection and network protection, enables selected process/logon/account auditing, sets bounded event-log sizes, ensures the EDR prerequisite is available, and reapplies the exact app trim. It never onboards EDR or installs vendor software. The scripting examples do not make persistent scripts exempt from later application-control policy.
+## 3. Account verification
 
-Install Windows and OEM driver updates, reboot, and repeat Windows Update until there are no applicable required updates. Check firmware and driver compatibility before proceeding. Then:
-
-```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$scripts\Test-Host.ps1" -Stage Base -ScanWindowsUpdate
-```
-
-Read the full JSON/table. Exit **1** means automatic checks failed, **2** means manual checks remain, **0** means no outstanding checks in that run. The script does not mark a host deployment-ready. It checks running VBS/HVCI/Credential Guard, TPM 2.0, Secure Boot, WHP, WinRE, core services, IPv4, Public uplinks, Defender, native firewall, the trim report and a current update scan when requested. A networkless adapter produces a failed Public-profile check until connectivity is exercised. The update scan searches applicable nonhidden software updates; it is not an OEM firmware or Defender-portal test.
-
-`VaultSvc`, `msiserver`, some servicing services and an unonboarded `Sense` can be trigger-start/stopped normally. They are checked for presence and a usable start configuration rather than forced to remain running. Core security services expected at this stage are checked separately.
-
-### If virtualization security fails
-
-Do not turn off VBS to make the host pass. Check firmware, `msinfo32`, Windows Security/Core isolation, the CodeIntegrity Operational log and the actual signed driver versions. `RequirePlatformSecurityFeatures=3` deliberately requires Secure Boot **and DMA protection**; `AvailableSecurityProperties` showing DMA support is not proof all peripherals are isolated. Validate **Kernel DMA Protection = On** on the real laptop.
-
-HVCI/Credential Guard/LSA are configured without permanent firmware locks. If an incompatible driver prevents boot, use the retained Windows recovery environment and a known-good signed driver or driver rollback. A temporary recovery-mode change is troubleshooting, not an approved deployed baseline. Restore enforcement and repeat all checks before use. No unknown driver is automatically removed by the scripts.
-
-## 3. Separate administration from VM work
-
-Create accounts interactively, without putting passwords in USB files:
-
-```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$scripts\New-HostAccounts.ps1"
-# Optional: recreate your three work roles, all as standard users.
-# powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$scripts\New-HostAccounts.ps1" -AddAcademicAndUsers
-```
-
-This creates `HOST-ADMIN` for administration and standard `WORK`. The optional switch also creates standard `ACADEMIC` and `USERS`; your original file gave WORK/ACADEMIC administrator rights. Each password is entered using `Read-Host -AsSecureString`. Existing accounts are never overwritten. If the script is interrupted, inspect the accounts it already created rather than rerunning blindly.
-
-Test HOST-ADMIN sign-in and UAC elevation first. Then, while signed in as HOST-ADMIN, demote or disable the original OOBE administrator through Settings/Computer Management. Do not remove the last tested administrator. Set up Windows Hello if wanted; biometric and credential components remain available. Run ordinary VMware GUI sessions as WORK; elevate only for installation, Virtual Network Editor or other operations that require it.
+The automatic completion workflow creates the configured HOST-ADMIN administrator and WORK standard user using secure password prompts. Test HOST-ADMIN sign-in and UAC elevation before demoting or disabling the initial OOBE administrator. This verification remains a human action and is not silently performed by the installer.
 
 ## 4. Encrypt before hostile-network deployment
 

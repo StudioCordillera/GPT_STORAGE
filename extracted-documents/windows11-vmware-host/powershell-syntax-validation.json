@@ -7,6 +7,10 @@
       "Errors": 0
     },
     {
+      "File": "Complete-Setup.ps1",
+      "Errors": 0
+    },
+    {
       "File": "Initialize-Host.ps1",
       "Errors": 0
     },
